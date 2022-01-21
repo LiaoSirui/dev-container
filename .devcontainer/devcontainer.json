@@ -1,0 +1,88 @@
+// For format details, see https://aka.ms/devcontainer.json. 
+{
+	"name": "dev-container",
+	"image": "registry.cn-shanghai.aliyuncs.com/dev-container/runtime:master_latest",
+	// Set *default* container specific settings.json values on container create.
+	"settings": {},
+	"mounts": [
+		"source=/etc/hosts,target=/etc/hosts,type=bind,consistency=cached",
+		"source=/etc/resolv.conf,target=/etc/resolv.conf,type=bind,consistency=cached",
+		// for ssh
+		"source=/root/.ssh,target=/root/.ssh,type=bind,consistency=cached",
+		// for docker
+		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind,consistency=cached",
+		// for kubelet
+		"source=/root/.kube,target=/root/.kube,type=bind,consistency=cached",
+		// for command history
+		"source=vscode-bash-history,target=/commandhistory,type=volume",
+		// for plugins
+		"source=vscode-plugins,target=/root/.vscode-server/extensions,type=volume",
+		"source=vscode-plugins-insiders,target=/root/.vscode-server-insiders/extensions,type=volume",
+	],
+	"workspaceMount": "source=/code/srliao,target=/code/srliao,type=bind,consistency=cached",
+	"workspaceFolder": "/code/srliao",
+	"runArgs": [
+		"--cap-add=NET_ADMIN",
+		"--network=host",
+	],
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"aaron-bond.better-comments",
+		"adpyke.vscode-sql-formatter",
+		"bierner.markdown-emoji",
+		"christian-kohler.path-intellisense",
+		"CoenraadS.bracket-pair-colorizer",
+		"DotJoshJohnson.xml",
+		"dsznajder.es7-react-js-snippets",
+		"eamodio.gitlens",
+		"Equinusocio.vsc-community-material-theme",
+		"Equinusocio.vsc-material-theme",
+		"equinusocio.vsc-material-theme-icons",
+		"formulahendry.auto-close-tag",
+		"formulahendry.auto-rename-tag",
+		"GitHub.copilot",
+		"goessner.mdmath",
+		"golang.go",
+		"Gruntfuggly.todo-tree",
+		"jeff-hykin.better-dockerfile-syntax",
+		"Kasik96.swift",
+		"matklad.rust-analyzer",
+		"ms-azuretools.vscode-docker",
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"ms-toolsai.jupyter",
+		"ms-toolsai.jupyter-keymap",
+		"ms-toolsai.jupyter-renderers",
+		"ms-vscode-remote.remote-containers",
+		"ms-vscode-remote.remote-ssh",
+		"ms-vscode-remote.remote-ssh-edit",
+		"ms-vscode.cpptools",
+		"ms-vscode.vscode-typescript-next",
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-mysql",
+		"mtxr.sqltools-driver-pg",
+		"mtxr.sqltools-driver-sqlite",
+		"nocalhost.nocalhost",
+		"octref.vetur",
+		"oliversturm.fix-json",
+		"redhat.vscode-commons",
+		"redhat.vscode-xml",
+		"redhat.vscode-yaml",
+		"rust-lang.rust",
+		"shd101wyy.markdown-preview-enhanced",
+		"statiolake.vscode-rustfmt",
+		"streetsidesoftware.code-spell-checker",
+		"tamasfe.even-better-toml",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"vscode-icons-team.vscode-icons",
+		"vscodevim.vim",
+		"yzhang.markdown-all-in-one",
+		"zhuangtongfa.material-theme"
+	],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+	// Comment out connect as root instead.
+	"remoteUser": "root"
+}

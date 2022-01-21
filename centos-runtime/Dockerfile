@@ -291,3 +291,20 @@ RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
     && echo 'source ~/.zshrc-custom' >> ~/.zshrc \
     \
     && set +ex
+
+# for vscode
+RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
+    \
+    echo "CACHEKEY=2022-01-12-01 -> just to force it rebuild" \
+    \
+    # using set -x for debug, set -e to ensure that each command execution is successful
+    && set -ex \
+    \
+    # https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+    && echo "export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" >> "/root/.bashrc" \
+    \
+    # https://code.visualstudio.com/remote/advancedcontainers/avoid-extension-reinstalls
+    && mkdir -p /root/.vscode-server/extensions \
+    /root/.vscode-server-insiders/extensions \
+    \
+    && set +ex

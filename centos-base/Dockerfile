@@ -197,13 +197,14 @@ RUN --mount=type=cache,target=/var/cache/yum,id=centos-zero-20211120 \
     # https://github.com/git-lfs/git-lfs/issues/3675
     && git config --global core.trustctime false \
     \
-    # docker and k8s client
-    && yum install -y docker-client kubernetes-client \
-    && kubectl version --client \
-    # && docker version \
-    \
     # copy files
     && rsync -av /files/* / \
+    \
+    # docker and k8s client
+    && yum install -y docker-ce-cli-19.03.12-3.el7.x86_64 kubectl-1.18.14-0.x86_64 \
+    && yum versionlock docker-ce-cli kubectl \
+    && kubectl version --client \
+    # && docker version \
     \
     # clean all
     && yum clean all \
