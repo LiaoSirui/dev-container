@@ -1,0 +1,15 @@
+# settings for proxy
+
+# where need proxy
+proxy() {
+    export PROXY_IP=10.24.18.102
+    export https_proxy=http://${PROXY_IP}:7890 http_proxy=http://${PROXY_IP}:7890 all_proxy=socks5://${PROXY_IP}:7890
+    export HTTPS_PROXY="${https_proxy}" HTTP_PROXY="${http_proxy}" ALL_PROXY="${all_proxy}"
+    echo "System http, https, socks5 Proxy on"
+}
+# proxy
+# where need noproxy
+noproxy() {
+    unset https_proxy http_proxy all_proxy HTTPS_PROXY HTTP_PROXY ALL_PROXY
+    echo "System http, https, socks5 Proxy off"
+}
