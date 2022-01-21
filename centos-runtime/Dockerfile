@@ -24,8 +24,8 @@ FROM registry.cn-shanghai.aliyuncs.com/dev-container/compile-zsh:master_latest a
 FROM registry.cn-shanghai.aliyuncs.com/dev-container/base:master_latest
 
 ENV \
-    PROXY_IP=10.24.8.2 \
-    PROXY_PORT=7890
+    PROXY_IP=10.24.1.136 \
+    PROXY_PORT=8888
 
 ENV \
     https_proxy=http://${PROXY_IP}:${PROXY_PORT} \
@@ -212,6 +212,24 @@ RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
     uglifycss \
     webpack \
     teadocs \
+    \
+    && set +ex
+
+# intall rust
+ENV \
+    PATH=/root/.cargo/bin:$PATH
+
+RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
+    \
+    echo "CACHEKEY=2022-01-12-01 -> just to force it rebuild" \
+    \
+    # using set -x for debug, set -e to ensure that each command execution is successful
+    && set -ex \
+    \
+    && curl -fsSL https://sh.rustup.rs | sh -s -- -y \
+    && rustup update \
+    && rustup component add rls rust-src rust-analysis \
+    && rustc --version \
     \
     && set +ex
 

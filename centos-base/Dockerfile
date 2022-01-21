@@ -18,8 +18,8 @@ COPY packages /packages
 FROM centos:7.9.2009
 
 ENV \
-    PROXY_IP=10.24.8.2 \
-    PROXY_PORT=7890
+    PROXY_IP=10.24.1.136 \
+    PROXY_PORT=8888
 
 ENV \
     https_proxy=http://${PROXY_IP}:${PROXY_PORT} \
@@ -188,6 +188,7 @@ RUN --mount=type=cache,target=/var/cache/yum,id=centos-zero-20211120 \
     cpp \
     \
     && wget https://silenceshell-1255345740.cos.ap-shanghai.myqcloud.com/topic/topic -O /usr/local/bin/topic \
+    && chmod +x /usr/local/bin/topic \
     \
     # config git
     && git config --global user.name "srliao" \
