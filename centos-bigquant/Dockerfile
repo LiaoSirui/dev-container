@@ -43,4 +43,7 @@ RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
     && poetry env use system \
     && poetry install \
     \
+    && git config --global user.name 'Sirui Liao' \
+    && git config --global user.email 'srliao@bigquant.ai' \
+    \
     && set +ex
