@@ -13,5 +13,9 @@ build_runtime:
 	# docker pull docker.io/library/centos:7.9.2009
 	make DOCKERFILE=centos-runtime/Dockerfile CUSTOM_IMAGE_NAME='runtime' DOCKER_BUILD_BASE_DIR=./centos-runtime build
 
+build_bigquant:
+	# docker pull docker.io/library/centos:7.9.2009
+	make DOCKERFILE=centos-bigquant/Dockerfile CUSTOM_IMAGE_NAME='bigquant' DOCKER_BUILD_BASE_DIR=./centos-bigquant build
+
 build_all:
-	make build_base build_runtime
+	make build_base build_runtime build_bigquant

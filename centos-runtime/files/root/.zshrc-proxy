@@ -2,8 +2,9 @@
 
 # where need proxy
 proxy() {
-    export PROXY_IP=10.24.18.102
-    export https_proxy=http://${PROXY_IP}:7890 http_proxy=http://${PROXY_IP}:7890 all_proxy=socks5://${PROXY_IP}:7890
+    export PROXY_IP=10.24.1.136
+    export PROXY_PORT=8888
+    export https_proxy=http://${PROXY_IP}:${PROXY_PORT} http_proxy=http://${PROXY_IP}:${PROXY_PORT} all_proxy=socks5://${PROXY_IP}:${PROXY_PORT}
     export HTTPS_PROXY="${https_proxy}" HTTP_PROXY="${http_proxy}" ALL_PROXY="${all_proxy}"
     echo "System http, https, socks5 Proxy on"
 }

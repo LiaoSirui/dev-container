@@ -1,15 +1,39 @@
 // For format details, see https://aka.ms/devcontainer.json. 
 {
 	"name": "dev-container",
-	"image": "registry.cn-shanghai.aliyuncs.com/dev-container/runtime:master_latest",
+	"image": "registry.cn-shanghai.aliyuncs.com/dev-container/bigquant:master_latest",
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
+	"settings": {
+		"terminal.integrated.fontFamily": "MesloLGS NF",
+		"workbench.colorTheme": "Material Theme High Contrast",
+		"workbench.iconTheme": "eq-material-theme-icons-light",
+		"workbench.startupEditor": "none",
+		"files.insertFinalNewline": true,
+		"files.watcherExclude": {
+			"**/.git/objects/**": true,
+			"**/.git/subtree-cache/**": true,
+			"**/node_modules/*/**": true
+		},
+		"editor.fontSize": 15,
+		// for toml files
+		"evenBetterToml.formatter.alignEntries": true,
+		"evenBetterToml.formatter.indentEntries": true,
+		"evenBetterToml.formatter.reorderKeys": true,
+		"evenBetterToml.formatter.indentTables": true,
+		"python.autoComplete.extraPaths": [
+			"/usr/local/python3/lib/python3.8/site-packages"
+		],
+		"python.analysis.extraPaths": [
+			"/usr/local/python3/lib/python3.8/site-packages"
+		],
+	},
 	"mounts": [
 		"source=/etc/hosts,target=/etc/hosts,type=bind,consistency=cached",
 		"source=/etc/resolv.conf,target=/etc/resolv.conf,type=bind,consistency=cached",
 		// for ssh
 		"source=/root/.ssh,target=/root/.ssh,type=bind,consistency=cached",
 		// for docker
+		"source=/root/.docker,target=/root/.docker,type=bind,consistency=cached",
 		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind,consistency=cached",
 		// for kubelet
 		"source=/root/.kube,target=/root/.kube,type=bind,consistency=cached",
@@ -49,6 +73,7 @@
 		"matklad.rust-analyzer",
 		"ms-azuretools.vscode-docker",
 		"ms-python.python",
+		"donjayamanne.python-extension-pack",
 		"ms-python.vscode-pylance",
 		"ms-toolsai.jupyter",
 		"ms-toolsai.jupyter-keymap",
@@ -77,7 +102,11 @@
 		"vscode-icons-team.vscode-icons",
 		"vscodevim.vim",
 		"yzhang.markdown-all-in-one",
-		"zhuangtongfa.material-theme"
+		"zhuangtongfa.material-theme",
+		"timonwong.shellcheck",
+		"davidanson.vscode-markdownlint",
+		"tomaciazek.ansible",
+		"ms-ceintl.vscode-language-pack-zh-hans"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

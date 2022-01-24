@@ -78,24 +78,26 @@ RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
     \
     # install these package for python runtime
     && yum install -y \
-    zlib-devel \
+    yum install -y \
     bzip2 \
     bzip2-devel \
-    openssl \
-    openssl-devel \
-    ncurses \
-    ncurses-devel \
-    sqlite-devel \
-    readline-devel \
-    tk-devel \
-    libffi-devel \
+    db4-devel \
     expat-devel \
     gdbm-devel \
-    xz-devel \
-    db4-devel \
+    libffi-devel \
     libpcap-devel \
-    python-devel \
     libtirpc \
+    ncurses \
+    ncurses-devel \
+    openldap-devel \
+    openssl \
+    openssl-devel \
+    python-devel \
+    readline-devel \
+    sqlite-devel \
+    tk-devel \
+    xz-devel \
+    zlib-devel \
     && cd /opt/srliao/python/Python-3.8.12 \
     && make install > /dev/null \
     && ln -sf /usr/local/python3/bin/python3 /usr/bin/python3 \
@@ -150,7 +152,7 @@ RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
     && set +ex
 
 ENV \
-    PATH=/usr/local/go/bin:$PATH \
+    PATH=/usr/local/go/bin:/root/go/bin:$PATH \
     GOROOT=/usr/local/go
 
 # install go
@@ -164,7 +166,19 @@ RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
     \
     && tar zxf /packages/go1.17.6.linux-amd64.tar.gz -C /usr/local \
     && go env -w GOPROXY=https://goproxy.cn,direct \
+    \
     && go version \
+    \
+    && go install github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest \
+    github.com/ramya-rao-a/go-outline@latest \
+    github.com/cweill/gotests/gotests@latest \
+    github.com/fatih/gomodifytags@latest \
+    github.com/josharian/impl@latest \
+    github.com/haya14busa/goplay/cmd/goplay@latest \
+    github.com/go-delve/delve/cmd/dlv@latest \
+    honnef.co/go/tools/cmd/staticcheck@latest \
+    golang.org/x/tools/gopls@latest \
+    || true \
     \
     && set +ex
 
@@ -278,12 +292,12 @@ RUN --mount=type=cache,target=/var/cache/yum,id=runtime-yum-20211120 \
     && echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc \
     \
     && source ~/.zshrc > /dev/null 2>&1 \
-    && zimfw install \
-    && zimfw update \
+    && zimfw install > /dev/null \
+    && zimfw update > /dev/null \
     \
     && echo 'source <(kubectl completion zsh)'  >> ~/.zshrc \
-    && echo 'complete -F __start_kubectl k' >> ~/.zshrc \
     && echo 'alias k=kubectl' >>~/.zshrc \
+    && echo 'complete -F __start_kubectl k' >> ~/.zshrc \
     && echo 'autoload -Uz compinit'  >>~/.zshrc \
     && echo 'compinit'  >>~/.zshrc \
     \
